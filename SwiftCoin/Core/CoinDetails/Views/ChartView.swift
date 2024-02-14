@@ -16,6 +16,7 @@ struct ChartView: View {
                 LineMark(x: .value("Date", item.date), y: .value("Price", item.value)
                 )
                 .interpolationMethod(.cardinal)
+                .foregroundStyle(viewModel.chartLineColor)
             }
         }
         .chartXScale(domain: ClosedRange(uncheckedBounds: (lower: viewModel.startDate, upper: viewModel.endDate)))

@@ -5,7 +5,7 @@
 //  Created by Fabio Avila Oliveira on 20/01/24.
 //
 
-import Foundation
+import SwiftUI
 
 class CoinDetailsViewModel {
     private let coin: Coin
@@ -18,6 +18,15 @@ class CoinDetailsViewModel {
     var minPrice = 0.0
     var xAxisValues = [Date]()
     var yAxisValues = [Double]()
+    
+    var coinName: String {
+        return coin.name
+    }
+    
+    var chartLineColor: Color {
+        let priceChange = (coin.sparklineIn7D?.price.last ?? 0) - (coin.sparklineIn7D?.price.first ?? 0)
+        return priceChange > 0 ? .green : .red
+    }
     
     var overviewSectionModel: CoinDetailSectionModel {
         
@@ -62,6 +71,8 @@ class CoinDetailsViewModel {
     init(coin: Coin) {
         self.coin = coin
         cofigureChartData()
+        
+        print("DEBUG: Coin is \(self.coinName)")
     }
     
     func cofigureChartData() {
